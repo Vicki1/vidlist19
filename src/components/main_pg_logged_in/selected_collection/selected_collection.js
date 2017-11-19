@@ -17,7 +17,8 @@ class SelectedCollection extends Component{
     }
 
     render(){
-       const selectedCollection=this.props.selectedCollection;
+        console.log('hey this is the currently selected collection', this.props.state.selectedCollection)
+       const selectedCollection=this.props.state.selectedCollection;
        const selectedCollectionDisplay=selectedCollection.map((video,i)=><div key={i}><Iframe className="embed-responsive-item" url={`https://www.youtube.com/embed/${video.video_id}`}   width="400px"
                     height="150px"
                     display="initial"
@@ -63,7 +64,7 @@ class SelectedCollection extends Component{
 function mapStateToProps(state){
    
     return{
-       selectedCollection : state.selectedCollection
+       state:state
     }
 }
 

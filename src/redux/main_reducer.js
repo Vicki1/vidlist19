@@ -15,10 +15,10 @@ const USER_ALREADY_LOGGED_IN= 'USER_ALREADY_LOGGED_IN';
 
 var initialState= 
 {
- 
-    username: '',
     userId: '',
+    username: '',
     collections: [],
+    videos: [],
     selectedVideo:'',
     selectedCollection: []
 
@@ -26,10 +26,10 @@ var initialState=
 
 
 //ACTION CRETORS, prepare them to be dispatched to reducer, but changes will happen in server via axios before action is passed to reducer to alter redux state
-export function saveVideo(id,collectionId,videoId,description){
+export function saveVideo(userId, collectionId,videoId,description){
     return {
         type: SAVE_VIDEO,
-        payload: axios.post(`/api/addVideoToCollection/`,{videoId:videoId, collectionId:collectionId, description:description})
+        payload: axios.post(`/api/addVideoToCollection/`,{userId: userId, videoId:videoId, collectionId:collectionId, description:description})
     .then((res)=>{
   
             return res.data;
@@ -39,45 +39,18 @@ export function saveVideo(id,collectionId,videoId,description){
    
 }
 
-/*export function newUser(newEmail,newUsername,newPassword){
-    return {
-        type: NEW_USER,
-        payload: axios.post(`/api/newUser`,{email:newEmail,username:newUsername,password:newPassword})
-        .then((res)=>{
-           
-            return res.data;
-        })
-        .catch(err=>console.log(err,' error from newUser action creator axios request'))
-    }
-   
-}
 
-export function loginUser(email,password){
-    console.log (email,password,'this is what loginUser action creator takes in');
-    return{
-        type: LOGIN_USER,
-        payload: axios.post(`/api/login`,{emailTryingToLogin: email, passwordTryingToLogin: password})
-        .then((res)=>{
-  
-            return res.data;
-        })
-        .catch(err=>console.log(err, 'error from loginUser axios request'))
-    }
-}*/
 
 export function setUser(username){
     console.log("loginwithAuth0 fired")
-    axios.get(`/test`)
-    .then(res=>console.log(res.data))
-    /*return{
+    return{
         type: SET_USER,
-        payload: axios.get(`/api/getUserCollections/${username}`)
+        payload: axios.get(`/auth/getUserCollections`)
        .then((res)=>{
            console.log(`set user axios fn returned `, res.data)
             return res.data
         })
-        .catch(err=>console.log(err, 'error from setUser axios request'))
-    }*/
+    }
         
 }
 
@@ -134,16 +107,8 @@ export function selectCollection(collectionId){
     }
 }
 
-/*export function putUserOnState(id,username){
-    console.log('put user Action: ',id,username)
-return{
-    type:USER_ALREADY_LOGGED_IN,
-    payload: {
-        userId: id,
-        username: username
-    }
-}
-}*/
+
+
 
 //DELETE VIDEO WITHIN DB, THEN GET NEW COLLECTION WITHOUT DELETED VIDEO AND SET IT TO SELECTED COLLECTION IN REDUX
 export function deleteVideo(id, collectionId){
@@ -159,33 +124,22 @@ export function deleteVideo(id, collectionId){
     
 }
 
-/*var initialState={
-    savedVideos : [
-        {collection:'',vidoeId:'',description:''},
-        {ollection:'',vidoeId:'',description:''},
-        {ollection:'',vidoeId:'',description:''}]
-}*/
-
-
-
-
-//create redux store with initial state
-
-
 export default function mainReducer(state=initialState,action){
    
     switch(action.type){
         
         case COLLECTION_SELECTED + '_FULFILLED':
+        console.log('collection_select action.payload is', action.payload)
             return Object.assign({},state,{selectedCollection:action.payload})
         
         case SAVE_VIDEO +  '_FULFILLED' :
-            return Object.assign({},state);
+         var newVideosArray = [...state.collections, action.payload];
+            return Object.assign({},state,{});
             
          
-        case SET_USER + 'FULFILLED' :
+        case SET_USER + '_FULFILLED' :
             console.log(action.payload, `this is what LOGIN_USER reducer fn takes in`);
-            return Object.assign({},state,{userId: action.payload.userId, username: action.payload.username, collections:action.payload.collections});
+            return Object.assign({},state,{userId: action.payload.userId, username: action.payload.display_name, collections:action.payload.collectionNames, videos : action.payload.videos});
 
         case USER_ALREADY_LOGGED_IN :
             console.log(action.payload, 'give to cookie whatever reducer')

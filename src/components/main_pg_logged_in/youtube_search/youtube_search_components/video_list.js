@@ -27,7 +27,8 @@ import {saveVideo,getCollections} from '../../../../redux/main_reducer';
       render(){
           console.log(this.state)
   const collections=this.props.collections
-        const collectionsList=collections.map((collection,i)=><li key={collection.id} ><button id={`${collection.id}SaveButton`} onClick={()=>this.props.saveVideo(this.props.userId, collection.id, this.props.video.id.videoId,this.state.description)}>{collection.collection_name}</button></li>) 
+  const userId=this.props.userId
+        const collectionsList=collections.map((collection,i)=><li key={collection.id} ><button id={`${collection.id}SaveButton`} onClick={()=>this.props.saveVideo(userId, collection.id, this.props.video.id.videoId,this.state.description)}>{collection.collection_name}</button></li>) 
           
  
  
@@ -43,11 +44,12 @@ import {saveVideo,getCollections} from '../../../../redux/main_reducer';
                     allowFullScreen/>
                     <br/> 
                     <input placeholder="Your Description ..." onChange={(event)=>this.setState(Object.assign({},this.state,{ description: event.target.value }))}/>
-                    <DropdownButton onClick={()=>{this.props.getCollections(this.props.userId)}} className='modal-container' title="Save To" id={`id_${this.props.video.id.videoId}`}>
-                           
+                     <div class="dropdown">
+                        <button class="dropbtn">Save To</button>
+                            <div class="dropdown-content">
                             {collectionsList}
-                            
-                    </DropdownButton>
+                            </div>
+                    </div>
                 </div>
                     
                 

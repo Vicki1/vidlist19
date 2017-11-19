@@ -122,20 +122,70 @@ app.get('/auth/logout', (req, res) => {
 //////////////////
  app.get("/test", (req,res)=>{
 console.log('this is working ',req.user.displayName)
-req.app.get('db').getUserIdCollections(req.user.displayName).then(results=>res.status(200).send(results[0]))
+
 
 })  
 
 
-app.get(`/auth/getUserCollections/:username`, (req,res)=>{
+app.get(`/auth/getUserCollections`, (req,res)=>{
   const db = req.app.get('db')
+
      // if doesn't work  try taking off req.app.get('db') and do app.get('db')
-     console.log(req.params.username)
-     db.getUserId(res.params.username)
-        .then(results=>
-            getUserCollections(results[0])
-            .then(res.status(200).send()))
-   
+     req.app.get('db').getUserId(req.user.displayName)
+    .then(results=>{
+      if(!results[0]){
+        db.createUserByAuth([req.user.id,req.user.displayName])
+        .then(results=>res.status(200).send({userId:results[0].id, display_name:req.user.displayName, collections:[] }))
+      }
+      else{
+        var userId=results[0].id
+        db.getUserCollectionNames(results[0].id)
+        .then(results=>{
+          var collectionNames=results
+          db.getUserVideos(userId)
+          .then(results=>res.status(200).send({userId : userId, display_name: req.user.displayName, collectionNames: collectionNames, videos : results}))
+        })
+         //db.getUsersVideos(results[0].id).then(results=>res.status(200).send({userId: userId, display_name: req.user.displayName, videos:results}))
+      }
+    }
+   )
+  })
+
+
+app.post(`/api/newCollection`, (req,res)=>{
+     let db= req.app.get('db')
+     console.log(req.body, 'this is what createCollection endpoint takes in')
+     db.createCollection([req.body.userId,req.body.newCollection])
+     .then(results=>{
+         console.log('new collection results', results[0])
+         res.status(200).send(results[0])
+    })
+    .catch(err=>{console.log(err, 'see newCollection server endpoint')})
+})
+
+
+app.post(`/api/addVideoToCollection/`, (req,res)=>{
+     let db= req.app.get('db')
+     console.log(req.body, 'this is what addVideo endpoint takes in')
+     db.addVideoToCollection([req.body.videoId,req.body.collectionId,req.body.description,req.body.userId])
+     .then(results=>{
+         console.log('new video added to collection ', results[0])
+         db.getUserId(req.user.displayName)
+     })
+     .catch(err=>console.log(err,' see addVideoToCollection endpoint'))
+})
+
+
+app.get('/api/selectCollection/:collectionId', (req,res)=>{
+    let db= req.app.get('db')
+    console.log(req.params.collectionId, 'this is what selectedCollection endpoint is taking in')
+    db.selectCollection(req.params.collectionId)
+    .then(results=>{
+        console.log('this is data returned to selectCollection endpoint', results)
+        res.status(200).send(results)
+    })
+    .catch(err=>console.log(err, ' see selectCollection server endpoint'))
+
 })
 
 

@@ -10,52 +10,56 @@ class Collections extends Component{
         super(props)
 
         this.state={
-            newCollection: ''
+            newCollection: '',
+            collections:[]
            
         }
  
     }
 
+componentWillMount(){
+    this.setState({collections: this.props.state.collections})
+    
+}
 
     render(){
-       
-       
-        //const collections=this.props.collections;
-        const collectionsList=(this.props.collections).map((collection,i)=>
-        <div className="individualCollectionDiv">
-        <button className="collectionsDropdownChoices" onClick={()=>this.props.selectCollection(collection.id)} key={collection.id}>{collection.collection_name}</button>
+       //console.log(this.props.state.collections);
+       var collections=this.props.state.collections
+       console.log(collections)
+        const collectionsList=(collections).map((collection,i)=>
+        <div key ={collection.id} className="individualCollectionDiv">
+        <button key={collection.id} className="collectionsDropdownChoices" onClick={()=>this.props.selectCollection(collection.id)} key={collection.id}>{collection.collection_name}</button>
   
         </div>
         ) 
-         const deleteCollectionsList=(this.props.collections).map((collection,i)=>
-        <div className="deleteIndividualCollectionDiv">
-        <button className="deleteCollectionsDropdownChoices" onClick={()=>this.props.deleteCollection(collection.id,this.props.userId)} key={collection.id}>{collection.collection_name}</button>
-        <button onClick={()=>deleteCollection(collection.id, this.props.userId)}>x</button>
+         const deleteCollectionsList=(this.state.collections).map((collection,i)=>
+        <div key={collection.id} className="deleteIndividualCollectionDiv">
+        <button className="deleteCollectionsDropdownChoices" onClick={()=>this.props.deleteCollection(collection.id,this.props.state.userId)} key={collection.id}>{collection.collection_name}</button>
+        <button key={collection.id} onClick={()=>deleteCollection(collection.id, this.props.state.userId)}>x</button>
         </div>
         ) 
         return(
            
             <div className="collectionsList">
-                <DropdownButton id='collectionsDropdown' onClick={()=>this.props.getCollections(this.props.userId)} className='modal-container' title="My collections" id={`id`}>
+                 
+               
                             
-                            {collectionsList}
+                         {collectionsList}
                             
-                    </DropdownButton>
+                    
                     <br/>
-                    <DropdownButton id='deleteCollectionsDropdown'   onClick={()=>this.props.getCollections(this.props.userId)} className='modal-container' title="play collection as playlist" id={`id`}>
+
                             
                             {deleteCollectionsList}
                             
-                </DropdownButton>
+               
                 <br/>
                
-                <button id="createNewCollectionButton" onClick={()=>this.props.createCollection(this.props.userId,this.state.newCollection)}>create</button><input className="newCollectionName" placeholder="new collection name ..." onChange={(event)=>this.setState(Object.assign({},this.state,{newCollection:event.target.value}))}/>
+                <button id="createNewCollectionButton" onClick={()=>this.props.createCollection(this.props.state.userId,this.state.newCollection)}>create</button><input className="newCollectionName" placeholder="new collection name ..." onChange={(event)=>this.setState(Object.assign({},this.state,{newCollection:event.target.value}))}/>
                 <br/>
-                <DropdownButton id='deleteCollectionsDropdown'  onClick={()=>this.props.getCollections(this.props.userId)} className='modal-container' title="delete" id={`id`}>
+
                             
-                            {deleteCollectionsList}
-                            
-                </DropdownButton>
+                       
                 
            
             </div>
@@ -68,8 +72,7 @@ class Collections extends Component{
 function mapStateToProps(state){
    
     return{
-        collections: state.collections,
-        userId: state.userId
+        state:state
     }
 }
 
