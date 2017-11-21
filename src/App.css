@@ -229,13 +229,38 @@ right: 60px;
 */
 
 .app-router-container{
-border: 5px solid green;
+
   top:200px;
   margin-left: 240px;
 
 }
 
+.selectedVideoContainer{
+  height:300px;
+ 
+}
+.selectedVideoSpacer{
+  height: 80px;
+}
+  .selectedVideo{
+    height: 250px;
+    width: 970px;
+    background: black;
+    margin: 0 auto;
+  }
+
+.titleVideoTypeContainer{
+
+  margin-top: 60px;
+  background: red;
+}
+
+.titleVideoTypeContainer span{
+  background: red;
+margin-left: 0;
+}
 .searchedVideosContainer{
+  margin-top: 50px;
   display: flex;
   flex-wrap: wrap;
 
@@ -244,4 +269,5 @@ border: 5px solid green;
 .youTubeSearchVideo{
   margin-right: 5px;
 }
+
 

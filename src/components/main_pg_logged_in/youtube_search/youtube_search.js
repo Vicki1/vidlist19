@@ -42,9 +42,18 @@ videoSearch(term){
         <SearchBar searchForTerm={videoSearch}/>
       <div className="youTubeSearchArea">
        <div className="selectedVideoContainer">
-         
-       </div>
+            <div className="selectedVideoSpacer">
+
+            </div>
+            <div className="selectedVideo">
+
+            </div>
+         </div>
+          <div className="titleVideoTypeContainer">
+           <span>hello</span>
+         </div>
        <div className="searchedVideosContainer">
+        
               {this.state.videos}
        </div>
    
