@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background: #F9F9F9;
 }
 
 .App-logo {
@@ -78,3 +79,169 @@
 
 
 /*seperator*/
+
+/*NavBarStuff*/
+
+
+
+.navBarDiv{
+  height: 56px;
+background: white;
+position: fixed;
+width: 100%;
+box-shadow: 4\px 4px 1px #e3e7ea
+}
+
+.navBarDiv div{
+display: flex;
+margin-top: 10px;
+justify-content: space-between;
+
+}
+
+.hamburgerAndYouTube{
+  width: 100px;
+}
+
+.hamburger{
+  height: 18px;
+  width: 18px;
+  margin-top: 5px;
+  margin-left: 25px;
+}
+
+
+.youTubeAndText{
+font-family: 'Roboto', sans-serif;
+  margin-left: 25px;
+  
+}
+.youTube{
+  fill: red;
+  height: 25px;
+  width: 25px;
+}
+.youTubeText{
+  margin-top: 5px;
+  margin-left: 3px;
+}
+
+
+/*
+//////////////////////////
+/////// SEARCH BAR NAV////
+//////////////////////////*/
+
+
+
+
+.youTubeSearchDiv{
+position: fixed;
+left: 240px;
+top: 5px;
+display: flex;
+
+
+
+}
+
+.youtubeSearchInput{
+margin-top: 10px;
+border: 1px solid lightgrey;
+padding-left: 10px;
+z-index: 6;
+}
+
+.magnifyingGlassContainer{
+height:15px;
+width: 50px;
+margin-top: 10px;
+border: 1px solid lightgrey;
+height: 34px;
+background: #f9f9f9;
+}
+
+.magnifyingGlass{
+    height: 15px;
+  width: 15px;
+  margin-top: 7px;
+  fill: grey;
+}
+
+#logInBtn{
+position: fixed;
+top: 25px;
+right: 60px;
+
+}
+.userIcon {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  height: 25px;
+  width: 25px;
+  fill: lavender;
+   background: purple;
+   border: 1px solid purple;
+   border-radius: 50px;
+  
+
+}
+
+
+/*
+/////////////////////////
+///// SIDE NAV BAR //////
+//////////////////////////
+*/
+
+.sideNavBarContainer{
+  margin-top:60px;
+  float: left;
+  height: 300vh;
+   width: 240px;
+  background: #f1f3f4
+}
+.singleMenuItemContainer{
+  display: flex;
+  height: 40px;
+  width: 240px;
+  
+}
+
+.singleMenuItemContainer div{
+ margin-top: 20px;
+  
+}
+
+.menuLogoContainer svg {
+  height: 19px;
+  width: 19px;
+  fill: grey;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+/*
+/////////////////////////
+///MAIN PG LOGGED IN////
+///////////////////////
+*/
+
+.app-router-container{
+border: 5px solid green;
+  top:200px;
+  margin-left: 240px;
+
+}
+
+.searchedVideosContainer{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+
+.youTubeSearchVideo{
+  margin-right: 5px;
+}
+

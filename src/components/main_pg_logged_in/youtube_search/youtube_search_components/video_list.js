@@ -37,8 +37,8 @@ import {saveVideo,getCollections} from '../../../../redux/main_reducer';
            <div className='youtTubeVideoDisplay'>
                 <div className="youTubeSearchVideo">
                     
-                    <Iframe className="embed-responsive-item" url={`https://www.youtube.com/embed/${this.props.video.id.videoId}`}   width="400px"
-                    height="150px"
+                    <Iframe className="embed-responsive-item" url={`https://www.youtube.com/embed/${this.props.video.id.videoId}`}   width="210px"
+                    height="118px"
                     display="initial"
                     position="relative"
                     allowFullScreen/>
@@ -68,5 +68,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps,{getCollections,saveVideo})(VideoItem);
-
-

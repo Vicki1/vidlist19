@@ -22,7 +22,7 @@ class YouTubeSearch extends Component {
 videoSearch(term){
    YTSearch({key: API_KEY, term:term,},(videos)=>{
   this.videolist = videos.map(video=>{
-    return <VideoItem key={video.etag} video={video}/>
+    return <VideoItem  key={video.etag} video={video}/>
   });
    this.setState({
        videos: this.videolist,
@@ -41,8 +41,13 @@ videoSearch(term){
       <div>
         <SearchBar searchForTerm={videoSearch}/>
       <div className="youTubeSearchArea">
-       
-       {this.state.videos}
+       <div className="selectedVideoContainer">
+         
+       </div>
+       <div className="searchedVideosContainer">
+              {this.state.videos}
+       </div>
+   
        
        
       </div>

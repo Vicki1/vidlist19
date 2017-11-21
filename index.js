@@ -9,7 +9,7 @@ const express= require('express')
     , session = require('express-session')
     , cors = require('cors')
     , cookieParser = require('cookie-parser')
-    //, path = require('path')
+    , path = require('path')
     , con = require('./src/config')
     , herokuURI = con.herokuURI
     , connectionString = herokuURI
@@ -187,6 +187,22 @@ app.get('/api/selectCollection/:collectionId', (req,res)=>{
     .catch(err=>console.log(err, ' see selectCollection server endpoint'))
 
 })
+
+
+
+//////////////////////////////////////////
+///THIS NEEDS TO BE THE LAST ENDPOINT////
+/////////////////////////////////////////
+
+
+
+/*app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname + '/../build'));
+})*/
+
+///////////////////////////////////////////////////
+//// END OF WHAT NEEDS TO BE THE LAST ENDPOINT////
+//////////////////////////////////////////////////
 
 
 ///////////////////

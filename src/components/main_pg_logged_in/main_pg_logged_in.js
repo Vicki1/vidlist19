@@ -35,11 +35,11 @@ componentDidMount(){
          console.log(`redux store state`, this.props.state)
         return(
             <div className="mainPageDiv">
-                Welcome {this.props.state.username}<br/>
+                <YouTubeSearch/>
               collections  <Collections/>
             selected collections <SelectedCollection/> 
-                <h2>Search YouTube Videos</h2>
-                <YouTubeSearch/>
+             
+                
             </div>
         )
     }
@@ -59,4 +59,3 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps,{setUser})(MainPage);
-
