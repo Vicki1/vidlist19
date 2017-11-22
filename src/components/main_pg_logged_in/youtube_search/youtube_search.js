@@ -50,7 +50,7 @@ videoSearch(term){
             </div>
          </div>
           <div className="titleVideoTypeContainer">
-           <span>hello</span>
+           <span>Recommended</span>
          </div>
        <div className="searchedVideosContainer">
         
