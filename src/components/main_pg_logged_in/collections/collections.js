@@ -17,6 +17,12 @@ class Collections extends Component{
  
     }
 
+/*/////// create collection button///////////
+             <button id="createNewCollectionButton" onClick={()=>this.props.createCollection(this.props.state.userId,this.state.newCollection)}>create</button><input className="newCollectionName" placeholder="new collection name ..." onChange={(event)=>this.setState(Object.assign({},this.state,{newCollection:event.target.value}))}/>
+
+
+*/ 
+
 componentWillMount(){
     this.setState({collections: this.props.state.collections})
     
@@ -25,7 +31,7 @@ componentWillMount(){
     render(){
        //console.log(this.props.state.collections);
        var collections=this.props.state.collections
-       console.log(collections)
+      
         const collectionsList=(collections).map((collection,i)=>
         <div key ={collection.id} className="individualCollectionDiv">
         <button key={collection.id} className="collectionsDropdownChoices" onClick={()=>this.props.selectCollection(collection.id)} key={collection.id}>{collection.collection_name}</button>
@@ -55,7 +61,7 @@ componentWillMount(){
                
                 <br/>
                
-                <button id="createNewCollectionButton" onClick={()=>this.props.createCollection(this.props.state.userId,this.state.newCollection)}>create</button><input className="newCollectionName" placeholder="new collection name ..." onChange={(event)=>this.setState(Object.assign({},this.state,{newCollection:event.target.value}))}/>
+   
                 <br/>
 
                             

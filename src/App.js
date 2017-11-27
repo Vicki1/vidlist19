@@ -4,10 +4,13 @@ import './App.css';
 import router from './router';
 import NavBar from './components/navBar/navBar';
 import SideNavBar from './components/sideNavBar/sideNavBar';
+import {connect} from 'react-redux';
 
 
 class App extends Component {
+
   render() {
+      console.log(this.props.state)
     return (
    <div className="App">
        
@@ -29,4 +32,12 @@ class App extends Component {
   }
 }
 
-export default App;
+
+function mapStateToProps(state){
+   
+    return{
+        state:state
+    }
+}
+
+export default connect(mapStateToProps,{})(App);

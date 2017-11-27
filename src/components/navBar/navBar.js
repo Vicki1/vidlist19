@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import SearchBar from "../main_pg_logged_in/youtube_search/youtube_search_components/search_bar"
+//import SearchBar from "../main_pg_logged_in/youtube_search/youtube_search_components/search_bar"
 
 
 export default class NavBar extends Component{

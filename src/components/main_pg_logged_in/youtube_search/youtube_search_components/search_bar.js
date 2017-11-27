@@ -6,7 +6,7 @@ export default class SeachBar extends Component{
 
 
         this.state={
-            searchTerm: 'puppies'
+            term: ''
         }
     }
 
@@ -18,7 +18,9 @@ export default class SeachBar extends Component{
       }
         return(
             <div className="youTubeSearchDiv">
-                <input className='youtubeSearchInput' style={YouTubeSearchInputStyle} placeholder="Search" value={this.state.term} onChange={event=>this.changeSearchTerm(event.target.value)}/>
+                <input className='youtubeSearchInput' style={YouTubeSearchInputStyle} placeholder="Search" 
+                value={this.state.term} 
+                onChange={event=>this.changeSearchTerm(event.target.value)}/>
                 <div className="magnifyingGlassContainer">
                     <svg className="magnifyingGlass" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 129 129" xmlns="http://www.w3.org/1999/xlink" enable-background="new 0 0 129 129">
                          <g>
@@ -31,9 +33,7 @@ export default class SeachBar extends Component{
     }
 
     changeSearchTerm(term){
-     this.setState({
-            searchTerm : Object.assign({},this.state,{searchTerm:term})
-                        });
+     this.setState({term});
     this.props.searchForTerm(term);
     }
     }

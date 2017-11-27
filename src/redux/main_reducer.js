@@ -7,6 +7,7 @@ const CREATE_COLLECTION = 'CREATE_COLLECTION';
 const GET_COLLECTION ='GET_COLLECTION';
 const COLLECTION_SELECTED = 'COLLECTION_SELECTED';
 const USER_ALREADY_LOGGED_IN= 'USER_ALREADY_LOGGED_IN';
+const SELECT_VIDEO='SELECT_VIDEO'
 //const DELETE_COLLECTION= 'DELETE_COLLECTION';
 
 
@@ -19,7 +20,7 @@ var initialState=
     username: '',
     collections: [],
     videos: [],
-    selectedVideo:'',
+    selectVideo:'',
     selectedCollection: []
 
 }
@@ -47,7 +48,7 @@ export function setUser(username){
         type: SET_USER,
         payload: axios.get(`/auth/getUserCollections`)
        .then((res)=>{
-           console.log(`set user axios fn returned `, res.data)
+           //console.log(`set user axios fn returned `, res.data)
             return res.data
         })
     }
@@ -87,7 +88,7 @@ return{
     type:  GET_COLLECTION,
     payload: axios.delete(`/api/deleteCollection/${userId}/${collectionId}`,)
     .then ((res)=>{
-        console.log(res.data)
+       // console.log(res.data)
         return res.data
     })
       .catch(err=>console.log(err, 'error from deleteCollection axios request'))
@@ -100,7 +101,7 @@ export function selectCollection(collectionId){
         type: COLLECTION_SELECTED,
         payload: axios.get(`/api/selectCollection/${collectionId}`)
         .then((res)=>{
-            console.log(res.data, 'this is what selectCollection axios call returned')
+           // console.log(res.data, 'this is what selectCollection axios call returned')
             return res.data
         })
         .catch(err=>console.log(err,' error from selectCollection axios request'))
@@ -124,6 +125,15 @@ export function deleteVideo(id, collectionId){
     
 }
 
+
+export function selectVideo(video){
+    console.log(`selectVideo recieves`, video)
+    return{
+        type: SELECT_VIDEO,
+        payload: video
+    }
+}
+
 export default function mainReducer(state=initialState,action){
    
     switch(action.type){
@@ -134,11 +144,11 @@ export default function mainReducer(state=initialState,action){
         
         case SAVE_VIDEO +  '_FULFILLED' :
          var newVideosArray = [...state.collections, action.payload];
-            return Object.assign({},state,{});
+            return Object.assign({},state,{videos: newVideosArray});//////////////this might be wrong
             
          
         case SET_USER + '_FULFILLED' :
-            console.log(action.payload, `this is what LOGIN_USER reducer fn takes in`);
+            //console.log(action.payload, `this is what LOGIN_USER reducer fn takes in`);
             return Object.assign({},state,{userId: action.payload.userId, username: action.payload.display_name, collections:action.payload.collectionNames, videos : action.payload.videos});
 
         case USER_ALREADY_LOGGED_IN :
@@ -154,6 +164,10 @@ export default function mainReducer(state=initialState,action){
             
             var newCollectionsArray = [...state.collections, action.payload];
             return Object.assign({},state,{collections : newCollectionsArray});
+
+        case SELECT_VIDEO + '_FULFILLED':
+        console.log(`select video action.payload`, action.payload)
+            return Object.assign({},state,{ selectVideo : action.payload});
 
         
    

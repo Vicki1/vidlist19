@@ -31,13 +31,12 @@ componentDidMount(){
 }
 
     render(){
-        console.log(`local state`, this.state)
-         console.log(`redux store state`, this.props.state)
+       
         return(
             <div className="mainPageDiv">
                 <YouTubeSearch/>
-              collections  <Collections/>
-            selected collections <SelectedCollection/> 
+           <Collections/>
+           <SelectedCollection/> 
              
                 
             </div>
