@@ -1,0 +1,11 @@
+.libraryDiv{
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e3e7ea;
+}
+
+.libraryLabel{
+   color: grey;
+  margin-left: 20px;
+  float: left;
+}

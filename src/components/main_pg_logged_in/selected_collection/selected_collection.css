@@ -1,0 +1,12 @@
+
+.selectedCollectionContainer{
+    
+    top: 50px;
+    background: pink;
+    width: 400px;
+}
+
+.selectedCollSpacer{
+    height: 65px;
+}
+

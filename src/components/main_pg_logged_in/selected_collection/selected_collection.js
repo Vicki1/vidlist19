@@ -2,6 +2,7 @@ import React,{Component} from "react";
 //import Iframe from 'react-iframe';
 //import ReactDOM from 'react-dom';
 //import Carousel from 'react-responsive-carousel'
+import './selected_collection.css';
 import Iframe from 'react-iframe';
 import {connect} from 'react-redux'; 
 import {deleteVideo} from '../../../redux/main_reducer';
@@ -12,14 +13,18 @@ class SelectedCollection extends Component{
         super(props)
 
         this.state={
-            selectedCollection: props.selectedCollection
+        selectedVideoInitial: 'mRf3-JkwqfU',
+        selectedVideo: '',
+        selectedVideoId: ''
         }
     }
 
     render(){
-        
+        console.log(this.state.selectedCollection)
        const selectedCollection=this.props.state.selectedCollection;
-       const selectedCollectionDisplay=selectedCollection.map((video,i)=><div key={i}><Iframe className="embed-responsive-item" url={`https://www.youtube.com/embed/${video.video_id}`}   width="400px"
+      // const selectedCollection0= this.props.state.selectedCollection[0].props.video.id.videoId
+       const selectedCollectionDisplay=selectedCollection.map((video,i)=>
+                <div className="selectedCollectionContainer" key={i}><Iframe className="embed-responsive-item" url={`https://www.youtube.com/embed/${video.video_id}`}   width="400px"
                     height="150px"
                     display="initial"
                     position="relative"
@@ -37,7 +42,45 @@ class SelectedCollection extends Component{
                    
                   
        )
-        /*var savedVideosDisplay= function(savedVideos){
+
+
+
+    
+             return(
+            <div className='selectedCollection'>
+
+                <div className="selectedCollSpacer"></div>
+
+                <div className="selectedCollVideo">
+                             <Iframe className="embed-responsive-item" 
+                             url={`https://www.youtube.com/embed/mRf3-JkwqfU`}    width="970px"
+                            height="250px"
+                    display="initial"
+                    position="relative"
+                    allowFullScreen/>
+
+                </div>
+                
+                <div className="selectedCollList">
+                    {selectedCollectionDisplay}
+                </div>
+                
+                 
+            </div>
+        )
+    }
+}
+function mapStateToProps(state){
+   
+    return{
+       state:state
+    }
+}
+
+export default connect(mapStateToProps,{deleteVideo})(SelectedCollection);
+
+
+    /*var savedVideosDisplay= function(savedVideos){
                                 console.log(savedVideos)
                                 if(savedVideos){
                                     savedVideos.map((video,i)=>{
@@ -53,19 +96,3 @@ class SelectedCollection extends Component{
                                      
                                      }
         */
-             return(
-            <div className='selectedCollection'>
-                 {selectedCollectionDisplay}
-                 
-            </div>
-        )
-    }
-}
-function mapStateToProps(state){
-   
-    return{
-       state:state
-    }
-}
-
-export default connect(mapStateToProps,{deleteVideo})(SelectedCollection);

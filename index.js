@@ -38,10 +38,32 @@ app.use(passport.session());
 ///////////////////
 //DATABASE SETUP//
 /////////////////
-
+/* worked before but didn't build tables;
 massive(connectionString).then(db =>{
     app.set('db', db)
 })
+*/
+
+massive({connectionString
+}).then(db=>{
+    app.set('db',db) 
+
+   
+       db.createUsersTable().then(response=>{
+            console.log(response,'collections table created')
+            }).catch(err=>console.log(err))
+        
+            db.createCollectionsTable().then(response=>{
+            console.log(response,'collections table created')
+            }).catch(err=>console.log(err))
+
+            
+               db.createVideosTable().then(response=>{
+               console.log(response,'video table  created')
+               }).catch(err=>console.log(err))
+                 
+            
+}).catch(err=>console.log(err))
 
 
 /////////////////////////

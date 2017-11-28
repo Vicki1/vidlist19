@@ -17,6 +17,7 @@ export default class NavBar extends Component{
           <div className='navBarDiv'>
                     <div className="hamburgerAndYouTube">
                                 <div className="menuYouTubeLogo">
+                                               
                                                             <svg className='hamburger' xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 459 459"  xml="preserve">
                                                                     <g>
                                                                         <g id="menu">

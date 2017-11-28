@@ -34,9 +34,10 @@ componentDidMount(){
        
         return(
             <div className="mainPageDiv">
+                    <SelectedCollection/> 
                 <YouTubeSearch/>
            <Collections/>
-           <SelectedCollection/> 
+       
              
                 
             </div>
