@@ -8,6 +8,7 @@ import Iframe from 'react-iframe';
 import {selectVideo} from '../../../redux/main_reducer';
 import {connect} from 'react-redux';
 import axios from 'axios';
+import AddToPlaylist from '../../imgs/add-to-playlist';
 
 //import {GoogleAuth, gapi, initClient, updateSigninStatus} from 'googleauth';
 
@@ -177,26 +178,18 @@ saveVideo(userId, collectionId,videoId,descriptionUser, channelTitle, videoTitle
             </div>
             <div className="selectedVideo">
 
- <Iframe className="embed-responsive-item" url={this.state.selectedVideo? `https://www.youtube.com/embed/${this.state.selectedVideoId}` : `https://www.youtube.com/embed/${this.state.selectVideoInitial}`}    width="970px"
+                  <Iframe className="embed-responsive-item" url={this.state.selectedVideo? `https://www.youtube.com/embed/${this.state.selectedVideoId}` : `https://www.youtube.com/embed/${this.state.selectVideoInitial}`}    width="970px"
                             height="250px"
                     display="initial"
                     position="relative"
                     allowFullScreen/>
 
                      
-                     <div class="dropdown">
-                        <button class="dropbtn">Save To</button>
-                            <div class="dropdown-content">
-                                 {collectionsList}
-                            </div>
-                    </div>
-
-                    /////
-                    <div class="dropdown">
-                          <span>Mouse over me</span>
+                    
+                   
+                    <div className="dropdown addToPlaylistSelector">
+                          <span className="addToPlaylist"><AddToPlaylist/></span>
                           <div class="dropdown-content">
-                            <p>Hello World!</p>
-                            <p>yo yoyo</p>
                           {collectionsList}
                           </div>
                     </div>
@@ -239,3 +232,15 @@ export default connect(mapStateToProps,{selectVideo})(YouTubeSearch);
 //onClick={()=>this.props.saveVideo(this.state.selectedVideo.props.state.userId, this.state.selectedVideo.props.state.collection.id, this.state.selectedVideo.props.video.id.videoId, this.state.selectedVideo.description, this.state.selectedVideo.props.video.snippet.channelTitle, this.state.selectedVideo.props.video.snippet.title, this.state.selectedVideo.props.video.snippet.description, this.state.selectedVideo.props.video.snippet.thumbnails.default.url)}>collection.name</button></li>) 
 
 // <input placeholder="Your Description ..." onChange={(event)=>this.setState(Object.assign({},this.state,{ description: event.target.value }))}/>
+
+/*
+ <div class="dropdown">
+                        <button class="dropbtn">Save To</button>
+                            <div class="dropdown-content">
+                                 {collectionsList}
+                            </div>
+                    </div>
+
+
+
+*/ 
