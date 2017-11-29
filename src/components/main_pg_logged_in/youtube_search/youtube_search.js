@@ -6,9 +6,12 @@ import VideoItem from  './youtube_search_components/video_list.js'
 import _ from 'lodash';
 import Iframe from 'react-iframe';
 import {selectVideo} from '../../../redux/main_reducer';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import axios from 'axios';
 
 //import {GoogleAuth, gapi, initClient, updateSigninStatus} from 'googleauth';
+
+const SAVE_VIDEO = "SAVE_VIDEO"
 
 class YouTubeSearch extends Component {
   constructor(props){
@@ -29,20 +32,57 @@ videoSearch(term){
   });
    this.setState({
        videos: this.videolist,
-       selectVideoInitial: 'mRf3-JkwqfU',
-       selectedVideo: '',
-       selectedVideoId:'',
-       
+       selectVideoInitial: this.videolist[0].props.video.id.videoId,
+       selectedVideo: true,
+       selectedVideoId:this.videolist[0].props.video.id.videoId,
+       description: '',  
+        selectedVideoVideoId: this.videolist[0].props.video.id.videoId,
+       selectedVideoChannelTitle : this.videolist[0].props.video.snippet.channelTitle, 
+        selectedVideoSnippetTitle : this.videolist[0].props.video.snippet.title, 
+        selectedVideoYouTubeDescription :  this.videolist[0].props.video.snippet.description,
+
+        selectedVideoImgUrl : this.videolist[0].props.video.snippet.thumbnails.default.url, 
+
       });
     });
 
+ this.saveVideo=this.saveVideo.bind(this)
 }
+
+
+  /*selectedVideo: false,
+       selectedVideoId:'mRf3-JkwqfU',
+       description: '',   description of selected video
+        selectedVideoVideoId= "", // this.state.selectedVideo.props.video.id.videoId,
+       selectedVideoUserDescription= "", // this.state.description,
+       selectedVideoChannelTitle = "", // this.state.selectedVideo.props.video.snippet.channelTitle,
+        selectedVideoSnippetTitle = "", // this.state.selectedVideo.props.video.snippet.title,
+        selectedVideoYouTubeDescription =  "", // this.state.selectedVideo.props.video.snippet.description,
+        selectedVideoImgUrl = "", // this.state.selectedVideo.props.video.snippet.thumbnails.default.url,
+*/
+
 /// figure out if presenting this.state.videoSelected wrong, or if need to have two turnaries going on lower, one to decide what to display, one to decide if to dipslay it, 
 // if can try to get onClick function to take to other page after get state set----BUT I FEEL WEIRD ABOUT THIS SO DO IT LAST!!
-//SET UP CHANNELS PAGE LAST AS MVP;
+// SET UP CHANNELS PAGE LAST AS MVP;
 // CHECK OUT ASCP CLASSES!!! make sure get done in time
 componentDidMount(){
   this.videoSearch(this.state.selectedVideo)
+  this.setState({selectedVideo: this.state.videos[0]})
+}
+
+
+//ACTION CRETORS, prepare them to be dispatched to reducer, but changes will happen in server via axios before action is passed to reducer to alter redux state
+saveVideo(userId, collectionId,videoId,descriptionUser, channelTitle, videoTitle, descriptionYouTube, thumbnailUrl){
+    return {
+        type: SAVE_VIDEO,
+        payload: axios.post(`/api/addVideoToCollection/`,{userId:userId, videoId:videoId, collectionId:collectionId, descriptionUser: descriptionUser, channelTitle:channelTitle, videoTitle:videoTitle, descriptionYouTube: descriptionYouTube, thumbnailUrl:thumbnailUrl })
+    .then((res)=>{
+  
+            return res.data;
+})
+    .catch(err=>console.log(err,' error from SaveVideo action creator axios request'))
+    }
+   
 }
 
 // <Iframe className="embed-responsive-item" url={this.state.selectedVideo? `https://www.youtube.com/embed/${this.state.selectedVideo.props.video.id.videoId}` : `https://www.youtube.com/embed/${this.state.selectVideoInitial}`}    width="970px"
@@ -50,12 +90,44 @@ componentDidMount(){
   render() {
     const videoSearch=_.debounce((term)=>{this.videoSearch(term)},300);
   console.log(`this is this.state.selectedVideo`, this.state.selectedVideo)
-     
+        const selectedCollection=this.props.state.selectedCollection;
+        //console.log(`selectedCollection`, selectedCollection)
    const videos=this.state.videos;
+   console.log(`videos`, this.state.videos)
+
+   /////trying to save video
+
+          const collections=this.props.state.collections;
+  const userId=this.props.state.userId;
+  const selectedVideo = this.state.selectedVideo
+  const selectedVideoVideoId= this.state.selectedVideoVideoId;
+  const selectedVideoUserDescription= this.state.description;
+  const selectedVideoChannelTitle = this.state.selectedVideoChannelTitle;
+  const selectedVideoSnippetTitle = this.state.selectedVideoSnippetTitle;
+  const selectedVideoYouTubeDescription =  this.state.selectedVideoYouTubeDescription;
+  const selectedVideoImgUrl = this.state.selectedVideoImgUrl;
+        const collectionsList=collections.map((collection,i)=><li key={collection.id} ><button id={`${collection.id}SaveButton`} onClick={()=>this.saveVideo(userId, collection.id, selectedVideoVideoId, selectedVideoUserDescription, selectedVideoChannelTitle, selectedVideoSnippetTitle,selectedVideoYouTubeDescription, selectedVideoImgUrl )}>{collection.collection_name}</button></li>) 
+          
+ 
+
+   
+         console.log(this.state)
+  
+
+
 
   const videoThumbnailList=videos.map((video,i)=>
                         
-                               <div onClick={()=>this.setState({selectedVideo : video, selectedVideoId: video.props.video.id.videoId})} className="youTubeSearchVideo">
+                               <div onClick={()=>this.setState({
+                                  selectedVideo : video, 
+                                  selectedVideoId: video.props.video.id.videoId,
+                                  //description: this.state.description,  
+                                  selectedVideoVideoId: video.props.video.id.videoId,
+                                  selectedVideoChannelTitle : video.props.video.snippet.channelTitle, 
+                                  selectedVideoSnippetTitle : video.props.video.snippet.title, 
+                                  selectedVideoYouTubeDescription :  video.props.video.snippet.description,
+                                  selectedVideoImgUrl : video.props.video.snippet.thumbnails.default.url 
+                                 })} className="youTubeSearchVideo">
                                  
                                     <img width="210px" height="118px" src={video.props.video.snippet.thumbnails.default.url}/> 
                                    
@@ -63,6 +135,37 @@ componentDidMount(){
                                     <div className="videoDescription">{video.props.video.snippet.channelTitle}</div>
                                </div>     
                           )
+
+   const selectedCollectionList=()=>{
+     if (selectedCollection.length>0){
+       return  
+          selectedCollection.map((video,i)=>
+                        <div onClick={()=>this.setState({
+                             selectedVideo : video, 
+                                  selectedVideoId: video.props.video.id.videoId,
+                                  //description: this.state.description,  
+                                  selectedVideoVideoId: video.props.video.id.videoId,
+                                  selectedVideoChannelTitle : video.props.video.snippet.channelTitle, 
+                                  selectedVideoSnippetTitle : video.props.video.snippet.title, 
+                                  selectedVideoYouTubeDescription :  video.props.video.snippet.description,
+                                  selectedVideoImgUrl : video.props.video.snippet.thumbnails.default.url 
+                          
+                          
+                          })} className="youTubeSearchVideo">
+                                 
+                                    <img width="210px" height="118px" src={video.thumbnail_url}/> 
+                                   
+                                    <div className="videoTitle">{video.video_title}</div><br/>
+                                    <div className="videoDescription">{video.channel_title}</div>
+                               </div> 
+                                  
+                          )
+     }
+     return ''
+   }
+   
+
+
                     
     return (
       <div>
@@ -79,13 +182,33 @@ componentDidMount(){
                     display="initial"
                     position="relative"
                     allowFullScreen/>
+
+                     
+                     <div class="dropdown">
+                        <button class="dropbtn">Save To</button>
+                            <div class="dropdown-content">
+                                 {collectionsList}
+                            </div>
+                    </div>
+
+                    /////
+                    <div class="dropdown">
+                          <span>Mouse over me</span>
+                          <div class="dropdown-content">
+                            <p>Hello World!</p>
+                            <p>yo yoyo</p>
+                          {collectionsList}
+                          </div>
+                    </div>
+                  
             </div>
          </div>
+            {selectedCollectionList}
           <div className="titleVideoTypeContainer">
            <span>Recommended</span>
          </div>
        <div className="searchedVideosContainer">
-
+        
              {videoThumbnailList}
        </div>
    
@@ -111,3 +234,8 @@ function mapStateToProps(state){
 
 
 export default connect(mapStateToProps,{selectVideo})(YouTubeSearch);
+
+
+//onClick={()=>this.props.saveVideo(this.state.selectedVideo.props.state.userId, this.state.selectedVideo.props.state.collection.id, this.state.selectedVideo.props.video.id.videoId, this.state.selectedVideo.description, this.state.selectedVideo.props.video.snippet.channelTitle, this.state.selectedVideo.props.video.snippet.title, this.state.selectedVideo.props.video.snippet.description, this.state.selectedVideo.props.video.snippet.thumbnails.default.url)}>collection.name</button></li>) 
+
+// <input placeholder="Your Description ..." onChange={(event)=>this.setState(Object.assign({},this.state,{ description: event.target.value }))}/>

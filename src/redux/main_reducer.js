@@ -27,10 +27,10 @@ var initialState=
 
 
 //ACTION CRETORS, prepare them to be dispatched to reducer, but changes will happen in server via axios before action is passed to reducer to alter redux state
-export function saveVideo(userId, collectionId,videoId,description){
+export function saveVideo(userId, collectionId,videoId,descriptionUser, channelTitle, videoTitle, descriptionYouTube, thumbnailUrl){
     return {
         type: SAVE_VIDEO,
-        payload: axios.post(`/api/addVideoToCollection/`,{userId: userId, videoId:videoId, collectionId:collectionId, description:description})
+        payload: axios.post(`/api/addVideoToCollection/`,{userId:userId, videoId:videoId, collectionId:collectionId, descriptionUser: descriptionUser, channelTitle:channelTitle, videoTitle:videoTitle, descriptionYouTube: descriptionYouTube, thumbnailUrl:thumbnailUrl })
     .then((res)=>{
   
             return res.data;

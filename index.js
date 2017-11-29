@@ -189,7 +189,8 @@ app.post(`/api/newCollection`, (req,res)=>{
 app.post(`/api/addVideoToCollection/`, (req,res)=>{
      let db= req.app.get('db')
      console.log(req.body, 'this is what addVideo endpoint takes in')
-     db.addVideoToCollection([req.body.videoId,req.body.collectionId,req.body.description,req.body.userId])
+
+     db.addVideoToCollection([req.body.videoId, req.body.collectionId, req.body.userId, req.body.descriptionUser, req.body.channelTitle, req.body.videoTitle, req.body.descriptionYouTube, req.body.thumbnailUrl ])
      .then(results=>{
          console.log('new video added to collection ', results[0])
          db.getUserId(req.user.displayName)
@@ -198,10 +199,10 @@ app.post(`/api/addVideoToCollection/`, (req,res)=>{
 })
 
 
-app.get('/api/selectCollection/:collectionId', (req,res)=>{
+app.get('/api/getUserCollectionNames/:collectionId', (req,res)=>{
     let db= req.app.get('db')
     console.log(req.params.collectionId, 'this is what selectedCollection endpoint is taking in')
-    db.selectCollection(req.params.collectionId)
+    db.getUserCollectionNames(req.params.collectionId)
     .then(results=>{
         console.log('this is data returned to selectCollection endpoint', results)
         res.status(200).send(results)

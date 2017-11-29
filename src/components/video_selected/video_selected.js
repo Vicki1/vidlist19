@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+/*import React,{Component} from 'react';
 import {connect} from 'react-redux';
 import Iframe from 'react-iframe';
 
@@ -13,6 +13,7 @@ import Iframe from 'react-iframe';
     )
 }
 */
+/*
 class VideoSelectedPage extends Component{
     constructor(props){
         super(props)
@@ -26,7 +27,7 @@ class VideoSelectedPage extends Component{
          <div className="videoTitle">{this.props.state.selectedVideo.props.video.snippet.title}</div><br/>
                             <div className="videoDescription">{this.props.state.selectedVideo.props.video.snippet.channelTitle}</div>
              
-         */
+         *//*
         console.log(this.props.state)
         console.log(this.state)
         return(
@@ -66,4 +67,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps,{})(VideoSelectedPage);
+export default connect(mapStateToProps,{})(VideoSelectedPage);*/

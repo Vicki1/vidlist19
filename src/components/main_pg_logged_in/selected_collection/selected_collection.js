@@ -23,26 +23,7 @@ class SelectedCollection extends Component{
         console.log(this.state.selectedCollection)
        const selectedCollection=this.props.state.selectedCollection;
       // const selectedCollection0= this.props.state.selectedCollection[0].props.video.id.videoId
-       const selectedCollectionDisplay=selectedCollection.map((video,i)=>
-                <div className="selectedCollectionContainer" key={i}><Iframe className="embed-responsive-item" url={`https://www.youtube.com/embed/${video.video_id}`}   width="400px"
-                    height="150px"
-                    display="initial"
-                    position="relative"
-                    allowFullScreen/>
-                    <br/>
-                    <div className="underVideo">
-                        <div>
-                            <span className="underVideoDescription">{video.description}</span>
-                        </div>
-                        <div>
-                            <button className="deleteVideoButton" onClick={()=>this.props.deleteVideo(video.id,video.collection_id) }>Delete</button>
-                        </div>
-                   </div>
-                   </div>
-                   
-                  
-       )
-
+    
 
 
     
@@ -52,18 +33,12 @@ class SelectedCollection extends Component{
                 <div className="selectedCollSpacer"></div>
 
                 <div className="selectedCollVideo">
-                             <Iframe className="embed-responsive-item" 
-                             url={`https://www.youtube.com/embed/mRf3-JkwqfU`}    width="970px"
-                            height="250px"
-                    display="initial"
-                    position="relative"
-                    allowFullScreen/>
+                             
 
                 </div>
                 
-                <div className="selectedCollList">
-                    {selectedCollectionDisplay}
-                </div>
+              
+             
                 
                  
             </div>
@@ -96,3 +71,24 @@ export default connect(mapStateToProps,{deleteVideo})(SelectedCollection);
                                      
                                      }
         */
+
+/* what was used to make video list but img and src instaed of Iframe and url
+ <img className="embed-responsive-item" src={`https://www.youtube.com/embed/${video.video_id}`}  
+                     width="400px"
+                    height="150px"
+                    display="initial"
+                    position="relative"
+                    allowFullScreen/>
+
+
+ */
+
+/* large video
+
+<Iframe className="embed-responsive-item" 
+                             url={`https://www.youtube.com/embed/mRf3-JkwqfU`}    width="970px"
+                            height="250px"
+                    display="initial"
+                    position="relative"
+                    allowFullScreen/>
+*/

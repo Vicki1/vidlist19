@@ -41,7 +41,7 @@ import {Link} from 'react-router-dom';
           console.log(this.state)
   const collections=this.props.collections
   const userId=this.props.userId
-        const collectionsList=collections.map((collection,i)=><li key={collection.id} ><button id={`${collection.id}SaveButton`} onClick={()=>this.props.saveVideo(userId, collection.id, this.props.video.id.videoId,this.state.description)}>{collection.collection_name}</button></li>) 
+        const collectionsList=collections.map((collection,i)=><li key={collection.id} ><button id={`${collection.id}SaveButton`} onClick={()=>this.props.saveVideo(this.props.state.userId, this.props.state.collection.id, this.props.video.id.videoId, this.state.description, this.props.video.snippet.channelTitle, this.props.video.snippet.title, this.props.video.snippet.description, this.props.video.snippet.thumbnails.default.url)}>{collection.collection_name}</button></li>) 
           
  
  
@@ -64,6 +64,13 @@ import {Link} from 'react-router-dom';
                             <div className="videoDescription">{this.props.video.snippet.channelTitle}</div>
                             
                 </div>
+                <input placeholder="Your Description ..." onChange={(event)=>this.setState(Object.assign({},this.state,{ description: event.target.value }))}/>
+                     <div class="dropdown">
+                        <button class="dropbtn">Save To</button>
+                            <div class="dropdown-content">
+                            {collectionsList}
+                            </div>
+                    </div>
                     
          </div>
         )
