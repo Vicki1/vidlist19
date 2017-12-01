@@ -51,11 +51,17 @@ class SelectedCollection extends Component{
             <div className='selectedCollection'>
 
                 <div className="selectedCollSpacer"></div>
-
+                          <Iframe className="embed-responsive-item" url={this.props.state.collTheySelected[0]? `https://www.youtube.com/embed/${this.props.state.collTheySelected[0].video_id}` : `https://www.youtube.com/embed/${this.state.selectVideoInitial}`}    width="970px"
+                            height="250px"
+                    display="initial"
+                    position="relative"
+                    allowFullScreen/>
                 <div className="selectedCollVideo2">
-                            yo yo yo this is the selected video page       
-hey this is showing super
-{this.props.state.collTheySelected[0] ?     selectedCollList : ''}
+
+
+                  
+                            
+                    {this.props.state.collTheySelected[0] ?     selectedCollList : 'There are no videos currently saved to this playlist'}
                 </div>
                 
               

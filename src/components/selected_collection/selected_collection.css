@@ -1,19 +1,17 @@
 
-.selectedCollectionContainer{
-    
-    top: 50px;
-    background: pink;
-    width: 400px;
-}
-
+/*need spacer to make page look right*/
 .selectedCollSpacer{
     height: 65px;
 }
 
 
+.selectedCollVideo2{
+    align-content:right;
+    border: 5px solid green;
+}
+
 .collListVideo {
   width: 210px;
-
   border: fuchsia 1px solid;
 }
 
