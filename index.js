@@ -211,6 +211,19 @@ app.get('/api/getUserCollectionNames/:collectionId', (req,res)=>{
 
 })
 
+//get all videos for whatever collection user clicked on to select
+app.get('/api/selectCollection/:collectionId', (req,res)=>{
+    let db= req.app.get('db')
+    console.log(req.params.collectionId, 'this is what selectedCollection endpoint is taking in')
+    db.selectCollection(req.params.collectionId)
+    .then(results=>{
+        console.log('this is data returned to selectCollection endpoint', results)
+        res.status(200).send(results)
+    })
+    .catch(err=>console.log(err, ' see selectCollection server endpoint'))
+
+})
+
 
 
 //////////////////////////////////////////

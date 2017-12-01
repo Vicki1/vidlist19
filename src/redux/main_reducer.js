@@ -21,7 +21,9 @@ var initialState=
     collections: [],
     videos: [],
     selectVideo:'',
-    selectedCollection: []
+    //somehow do I need both  of these to get collections to render correctly?
+    selectedCollection: false,
+    collTheySelected: [],
 
 }
 
@@ -117,10 +119,10 @@ export function deleteVideo(id, collectionId){
        type: COLLECTION_SELECTED,
        payload: axios.delete(`/api/deleteVideo/${id}/${collectionId}`)
         .then((res)=>{
-            console.log(res.data, 'this is what selectCollection axios call returned')
+            console.log(res.data, 'this is what deleteCollection axios call returned')
             return res.data
         })
-        .catch(err=>console.log(err,' error from selectCollection axios request'))
+        .catch(err=>console.log(err,' error from deleteCollection axios request'))
    }
     
 }
@@ -140,7 +142,7 @@ export default function mainReducer(state=initialState,action){
         
         case COLLECTION_SELECTED + '_FULFILLED':
         console.log('collection_select action.payload is', action.payload)
-            return Object.assign({},state,{selectedCollection:action.payload})
+            return Object.assign({},state,{collTheySelected :action.payload, selectedCollection: true})
         
         case SAVE_VIDEO +  '_FULFILLED' :
          var newVideosArray = [...state.collections, action.payload];

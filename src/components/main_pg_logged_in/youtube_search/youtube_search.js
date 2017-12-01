@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 import {API_KEY} from '../../../config'
 import YTSearch from 'youtube-api-search';
@@ -43,7 +44,7 @@ videoSearch(term){
         selectedVideoYouTubeDescription :  this.videolist[0].props.video.snippet.description,
 
         selectedVideoImgUrl : this.videolist[0].props.video.snippet.thumbnails.default.url, 
-
+        
       });
     });
 
@@ -137,34 +138,7 @@ saveVideo(userId, collectionId,videoId,descriptionUser, channelTitle, videoTitle
                                </div>     
                           )
 
-   const selectedCollectionList=()=>{
-     if (selectedCollection.length>0){
-       return  
-          selectedCollection.map((video,i)=>
-                        <div onClick={()=>this.setState({
-                             selectedVideo : video, 
-                                  selectedVideoId: video.props.video.id.videoId,
-                                  //description: this.state.description,  
-                                  selectedVideoVideoId: video.props.video.id.videoId,
-                                  selectedVideoChannelTitle : video.props.video.snippet.channelTitle, 
-                                  selectedVideoSnippetTitle : video.props.video.snippet.title, 
-                                  selectedVideoYouTubeDescription :  video.props.video.snippet.description,
-                                  selectedVideoImgUrl : video.props.video.snippet.thumbnails.default.url 
-                          
-                          
-                          })} className="youTubeSearchVideo">
-                                 
-                                    <img width="210px" height="118px" src={video.thumbnail_url}/> 
-                                   
-                                    <div className="videoTitle">{video.video_title}</div><br/>
-                                    <div className="videoDescription">{video.channel_title}</div>
-                               </div> 
-                                  
-                          )
-     }
-     return ''
-   }
-   
+
 
 
                     
@@ -196,7 +170,7 @@ saveVideo(userId, collectionId,videoId,descriptionUser, channelTitle, videoTitle
                   
             </div>
          </div>
-            {selectedCollectionList}
+          
           <div className="titleVideoTypeContainer">
            <span>Recommended</span>
          </div>
@@ -240,7 +214,4 @@ export default connect(mapStateToProps,{selectVideo})(YouTubeSearch);
                                  {collectionsList}
                             </div>
                     </div>
-
-
-
 */ 

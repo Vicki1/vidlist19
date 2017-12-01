@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Collections from './collections/collections';
-import SelectedCollection from './selected_collection/selected_collection';
+import SelectedCollection from '../selected_collection/selected_collection';
 import YouTubeSearch from './youtube_search/youtube_search';
 import {setUser} from '../../redux/main_reducer';
 import {connect} from 'react-redux';
@@ -34,7 +34,7 @@ componentDidMount(){
        
         return(
             <div className="mainPageDiv">
-                    <SelectedCollection/> 
+                    {this.props.state.selectedCollection? <SelectedCollection/> : ''}
                 <YouTubeSearch/>
            <Collections/>
        

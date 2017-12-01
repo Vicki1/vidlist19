@@ -50,7 +50,7 @@ componentWillMount(){
                  
                
                             
-                         {collectionsList}
+                         
                             
                     
                     <br/>
