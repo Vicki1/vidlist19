@@ -8,7 +8,7 @@ import SelectedCollection from './components/selected_collection/selected_collec
 
 export default(
     <Switch>
-        <Route component={App} path='/' exact/>
+        <Route component={MainPgLoggedIn} path='/' exact/>
         <Route component={MainPgLoggedIn} path="/mainPgLoggedIn" exact/>
         <Route component={SelectedCollection} path="/selectedCollection" exact/>
 

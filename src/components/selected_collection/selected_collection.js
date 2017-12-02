@@ -33,13 +33,13 @@ componentWillMount(){
     const selectedCollList= selectedCollection.map((video,i)=>
                         <div onClick={()=>this.setState({
                              selectedVideo : video, 
-                                  selectedVideoId: video.props.video.id.videoId,
+                                  selectedVideoId: video.video_id,
                                   //description: this.state.description,  
-                                  selectedVideoVideoId: video.props.video.id.videoId,
-                                  selectedVideoChannelTitle : video.props.video.snippet.channelTitle, 
-                                  selectedVideoSnippetTitle : video.props.video.snippet.title, 
-                                  selectedVideoYouTubeDescription :  video.props.video.snippet.description,
-                                  selectedVideoImgUrl : video.props.video.snippet.thumbnails.default.url 
+                                  selectedVideoVideoId: video.video_id,
+                                  selectedVideoChannelTitle : video.channel_title, 
+                                  selectedVideoSnippetTitle : video.video_title, 
+                                  selectedVideoYouTubeDescription :  video.description_youtube,
+                                  selectedVideoImgUrl : video.thumbnail_url
                           
                           
                           })} className="collListVideo">

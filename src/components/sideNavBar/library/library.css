@@ -9,3 +9,11 @@
   margin-left: 20px;
   float: left;
 }
+
+.notLoggedIn{
+    color:grey;
+
+    margin-right:120px;
+    font-size: 12px;
+    
+}

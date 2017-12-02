@@ -37,7 +37,8 @@ class Library extends Component{
         return(
          <div className="libraryDiv">
              <span className="libraryLabel">LIBRARY</span>
-               {collectionsList}
+               
+                {collectionsList}    
            </div>
         )
     }

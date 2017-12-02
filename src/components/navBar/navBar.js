@@ -1,8 +1,9 @@
 import React,{Component} from 'react';
 //import SearchBar from "../main_pg_logged_in/youtube_search/youtube_search_components/search_bar"
 import "./navBar.css";
+import {connect} from 'react-redux';
 
-export default class NavBar extends Component{
+class NavBar extends Component{
   constructor(props){
       super(props)
 
@@ -101,7 +102,9 @@ export default class NavBar extends Component{
                                  
               </div>
           
-                       <a id="logInBtn" href="http://localhost:3001/auth">                 <svg className="userIcon" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 258.75 258.75" width="512px" height="512px">
+                       <a id="logInBtn" href="http://localhost:3001/auth">  
+                                
+                       <svg className="userIcon" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 258.75 258.75" width="512px" height="512px">
                                 <g>
                                     <circle cx="129.375" cy="60" r="60" />
                                     <path d="M129.375,150c-60.061,0-108.75,48.689-108.75,108.75h217.5C238.125,198.689,189.436,150,129.375,150z" />
@@ -146,3 +149,13 @@ export default class NavBar extends Component{
       )
   }
 }
+
+
+function mapStateToProps(state){
+   
+    return{
+       state:state
+    }
+}
+
+export default connect(mapStateToProps)(NavBar);
