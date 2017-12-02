@@ -14,11 +14,18 @@ class SelectedCollection extends Component{
 
         this.state={
         selectedVideoInitial: 'mRf3-JkwqfU',
-        selectedVideo: '',
-        selectedVideoId: ''
+        selectedVideoId: '',
+        
         }
     }
 
+
+componentWillMount(){
+    if(this.props.state.collTheySelected.length >0){
+            this.setState({selectedVideoId: this.props.state.collTheySelected[0].video_id})
+    }
+
+}
     render(){
        // console.log(this.state.selectedCollection)
      
@@ -51,21 +58,22 @@ class SelectedCollection extends Component{
             <div className='selectedCollection'>
 
                 <div className="selectedCollSpacer"></div>
-                          <Iframe className="embed-responsive-item" url={this.props.state.collTheySelected[0]? `https://www.youtube.com/embed/${this.props.state.collTheySelected[0].video_id}` : `https://www.youtube.com/embed/${this.state.selectVideoInitial}`}    width="970px"
-                            height="250px"
+                          
+                <div className="selectedCollVideo2">
+
+                    <Iframe className="embed-responsive-item selColVideo1" url={this.state.selectedVideoId? `https://www.youtube.com/embed/${this.state.selectedVideoId}` : `https://www.youtube.com/embed/${''}` }    width="640px"
+                            height="360px"
                     display="initial"
                     position="relative"
                     allowFullScreen/>
-                <div className="selectedCollVideo2">
-
-
                   
-                            
+                     <div>       
                     {this.props.state.collTheySelected[0] ?     selectedCollList : 'There are no videos currently saved to this playlist'}
+                    </div>
                 </div>
                 
               
-             
+             <div className="bottomSelColSpacer"></div>
                 
                  
             </div>

@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 //import SearchBar from "../main_pg_logged_in/youtube_search/youtube_search_components/search_bar"
-
+import "./navBar.css";
 
 export default class NavBar extends Component{
   constructor(props){
@@ -56,6 +56,7 @@ export default class NavBar extends Component{
                                                                     </g>
                                                                     </svg>
                                 </div>
+                                
                                 <div className="youTubeAndText">
                                                                     <svg className="youTube" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                                         viewBox="0 0 461.001 461.001"  xml="preserve">
@@ -97,7 +98,9 @@ export default class NavBar extends Component{
                                                                     <span className="youTubeText">YouTube</span>
                                 </div>
                                 
+                                 
               </div>
+          
                        <a id="logInBtn" href="http://localhost:3001/auth">                 <svg className="userIcon" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 258.75 258.75" width="512px" height="512px">
                                 <g>
                                     <circle cx="129.375" cy="60" r="60" />

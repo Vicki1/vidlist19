@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import HomeImg from '../imgs/home-button'
 import Library from './library/library';
-
+import './sideNavBar.css';
 export default class SideNavBar extends Component{
   constructor(props){
       super(props)
@@ -14,7 +14,7 @@ export default class SideNavBar extends Component{
       return(
           <div className="sideNavBarContainer">
                <div className="homeTrendingSubMenu">
-                   
+                        <a href="/mainPgLoggedIn">
                         <div className="singleMenuItemContainer">
                             <div className="menuLogoContainer">
                                     <HomeImg/>   
@@ -23,7 +23,7 @@ export default class SideNavBar extends Component{
                                          <span className="menuWord">Home</span>
                             </div>
                         </div>
-
+                        </a>
                         <Library/>
                         
                </div>     

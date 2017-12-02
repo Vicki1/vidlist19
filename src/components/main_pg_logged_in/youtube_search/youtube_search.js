@@ -6,10 +6,11 @@ import SearchBar from './youtube_search_components/search_bar.js'
 import VideoItem from  './youtube_search_components/video_list.js'
 import _ from 'lodash';
 import Iframe from 'react-iframe';
-import {selectVideo} from '../../../redux/main_reducer';
+import {selectVideo,createCollection} from '../../../redux/main_reducer';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import AddToPlaylist from '../../imgs/add-to-playlist';
+
 
 //import {GoogleAuth, gapi, initClient, updateSigninStatus} from 'googleauth';
 
@@ -108,7 +109,7 @@ saveVideo(userId, collectionId,videoId,descriptionUser, channelTitle, videoTitle
   const selectedVideoSnippetTitle = this.state.selectedVideoSnippetTitle;
   const selectedVideoYouTubeDescription =  this.state.selectedVideoYouTubeDescription;
   const selectedVideoImgUrl = this.state.selectedVideoImgUrl;
-        const collectionsList=collections.map((collection,i)=><li key={collection.id} ><button id={`${collection.id}SaveButton`} onClick={()=>this.saveVideo(userId, collection.id, selectedVideoVideoId, selectedVideoUserDescription, selectedVideoChannelTitle, selectedVideoSnippetTitle,selectedVideoYouTubeDescription, selectedVideoImgUrl )}>{collection.collection_name}</button></li>) 
+        const collectionsList=collections.map((collection,i)=><p id={`${collection.id}SaveButton`} onClick={()=>this.saveVideo(userId, collection.id, selectedVideoVideoId, selectedVideoUserDescription, selectedVideoChannelTitle, selectedVideoSnippetTitle,selectedVideoYouTubeDescription, selectedVideoImgUrl )}>{collection.collection_name}</p>) 
           
  
 
@@ -164,7 +165,12 @@ saveVideo(userId, collectionId,videoId,descriptionUser, channelTitle, videoTitle
                     <div className="dropdown addToPlaylistSelector">
                           <span className="addToPlaylist"><AddToPlaylist/></span>
                           <div class="dropdown-content">
+                            
                           {collectionsList}
+                          <div className="newCollEntry">
+                            <input className="newCollectionName" placeholder="new collection name ..." onChange={(event)=>this.setState(Object.assign({},this.state,{newCollection:event.target.value}))}/>
+                           <button id="createNewCollectionButton" onClick={()=>this.props.createCollection(this.props.state.userId,this.state.newCollection)}>create</button>
+                           </div>
                           </div>
                     </div>
                   
@@ -200,7 +206,7 @@ function mapStateToProps(state){
 }
 
 
-export default connect(mapStateToProps,{selectVideo})(YouTubeSearch);
+export default connect(mapStateToProps,{selectVideo,createCollection})(YouTubeSearch);
 
 
 //onClick={()=>this.props.saveVideo(this.state.selectedVideo.props.state.userId, this.state.selectedVideo.props.state.collection.id, this.state.selectedVideo.props.video.id.videoId, this.state.selectedVideo.description, this.state.selectedVideo.props.video.snippet.channelTitle, this.state.selectedVideo.props.video.snippet.title, this.state.selectedVideo.props.video.snippet.description, this.state.selectedVideo.props.video.snippet.thumbnails.default.url)}>collection.name</button></li>) 

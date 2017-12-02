@@ -304,3 +304,7 @@ margin-left:60vw;
 .selectedCollectionList{
   background: pink;
 }
+
+.newCollEntry{
+display:flex;
+}

@@ -4,15 +4,25 @@
     height: 65px;
 }
 
+.selColVideo1{
+    float: left;
+
+    margin: 10px;
+    margin-left: 15px;
+}
+
 
 .selectedCollVideo2{
+  display: flex;
+  justify-content: space-between;
     align-content:right;
-    border: 5px solid green;
+    
 }
 
 .collListVideo {
   width: 210px;
-  border: fuchsia 1px solid;
+border: 1px solid #f1f3f4;
+
 }
 
 .collVideoTitle{
@@ -28,4 +38,9 @@
   color: grey;
 text-align: left;
    ;
+}
+
+
+.bottomSelColSpacer{
+height: 100vh;
 }
