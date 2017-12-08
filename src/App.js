@@ -5,7 +5,7 @@ import router from './router';
 import NavBar from './components/navBar/navBar';
 import SideNavBar from './components/sideNavBar/sideNavBar';
 import {connect} from 'react-redux';
-
+require('dotenv').config();
 
 class App extends Component {
 

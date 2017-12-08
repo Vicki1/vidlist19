@@ -1,6 +1,6 @@
 
 
-
+require('dotenv').config()
 const express= require('express')
     , bodyParser= require('body-parser')
     , passport = require('passport')
@@ -10,8 +10,8 @@ const express= require('express')
     , cors = require('cors')
     , cookieParser = require('cookie-parser')
     , path = require('path')
-    , con = require('./src/config')
-    , herokuURI = con.herokuURI
+    //, con = require('./src/config')
+    , herokuURI = process.env.REACT_APP_HEROKU_URI //con.herokuURI
     , connectionString = herokuURI
 
     const app=express();
@@ -26,7 +26,7 @@ app.use(express.static(__dirname + '/../build'));
 app.use(cookieParser())
 app.use(bodyParser());
    app.use(session({
-        secret: con.sessionSecret,
+        secret: process.env.REACT_APP_SESSION_SECRET,     //con.sessionSecret,
         resave: false,
         saveUninitialized: true
 }));
@@ -47,8 +47,8 @@ massive(connectionString).then(db =>{
 massive({connectionString
 }).then(db=>{
     app.set('db',db) 
-
-   
+ 
+   console.log(`index recieving?`,process.env.REACT_APP_CALLBACK_URL)
        db.createUsersTable().then(response=>{
             console.log(response,'collections table created')
             }).catch(err=>console.log(err))
@@ -72,10 +72,10 @@ massive({connectionString
 
 const strategy = new Auth0Strategy(
   {
-    domain: con.domain,
-    clientID: con.clientID,
-    clientSecret: con.clientSecret,
-    callbackURL: con.callbackURL
+    domain: process.env.REACT_APP_DOMAIN, //con.domain,
+    clientID:process.env.REACT_APP_CLIENT_ID2, // con.clientID,
+    clientSecret: process.env.REACT_APP_CLIENT_SECRET, //con.clientSecret,
+    callbackURL:process.env.REACT_APP_CALLBACK_URL //con.callbackURL
   },
   (accessToken, refreshToken, extraParams, profile, done) => {
     
