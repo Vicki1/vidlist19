@@ -22,3 +22,4 @@ yarn-error.log*
 
 configstuff.js
 .env
+.env.prod

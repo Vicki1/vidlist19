@@ -18,7 +18,7 @@ var initialState=
 {
     userId: '',
     username: '',
-    collections: [],
+    collections: [{id:"1", collection_name:''}],
     videos: [],
     selectVideo:'',
     //somehow do I need both  of these to get collections to render correctly?

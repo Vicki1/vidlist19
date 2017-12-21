@@ -23,8 +23,8 @@ class MainPage extends Component{
 componentDidMount(){
  axios.get(`/auth/me`)
  .then((results)=>{
-     //console.log(`results from ComponentDidMoutn `,results)
-     //this.setState({username:results.data})
+     console.log(`results from ComponentDidMoutn `,results)
+     this.setState({username:results.data})
      this.props.setUser(results.data)
     })
  .catch((err)=>console.log(`error see main_pg_logged_in.componentDidMount`,err))

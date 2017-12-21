@@ -38,12 +38,12 @@ componentWillMount(){
   
         </div>
         ) 
-         const deleteCollectionsList=(this.state.collections).map((collection,i)=>
+         /*const deleteCollectionsList=(this.state.collections).map((collection,i)=>
         <div key={collection.id} className="deleteIndividualCollectionDiv">
         <button className="deleteCollectionsDropdownChoices" onClick={()=>this.props.deleteCollection(collection.id,this.props.state.userId)} key={collection.id}>{collection.collection_name}</button>
         <button key={collection.id} onClick={()=>deleteCollection(collection.id, this.props.state.userId)}>x</button>
         </div>
-        ) 
+        ) */
         return(
            
             <div className="collectionsList">
@@ -56,7 +56,7 @@ componentWillMount(){
                     <br/>
 
                             
-                            {deleteCollectionsList}
+               
                             
                
                 <br/>

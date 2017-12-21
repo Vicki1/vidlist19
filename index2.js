@@ -1,4 +1,5 @@
 
+
 require('dotenv').config()
 const express= require('express')
     , bodyParser= require('body-parser')
@@ -21,7 +22,7 @@ app.use(cors())
 
  
 
-app.use(express.static(__dirname + '/../build'));
+app.use(express.static(__dirname + '/build'));   // '/../build'
 app.use(cookieParser())
 app.use(bodyParser());
    app.use(session({
@@ -107,13 +108,14 @@ passport.deserializeUser(function(user, done) {
 app.get('/auth', passport.authenticate('auth0'));
 
 app.get('/auth/callback', passport.authenticate('auth0', {
-  successRedirect: process.env.REACT_APP_SUCCESS_REDIRECT,
-  failureRedirect:  process.env.REACT_APP_FAILURE_REDIRECT
+ successRedirect: '/mainPgLoggedIn',
+  failureRedirect: '/#/'
 }))
 /*
 passport.serializeUser(function(user, done) {
   done(null, user);
 });
+
 passport.deserializeUser(function(user, done) {
   app.get('db').find_session_user([user.id])
   .then( user => {
@@ -239,9 +241,14 @@ app.get('/api/selectCollection/:collectionId', (req,res)=>{
 //////////////////////////////////////////////////
 
 
+app.get('*', (req, res)=>{
+  res.sendFile(path.join(__dirname, '/build/index.html'));
+})
 ///////////////////
     let PORT = 3001;
     app.listen(PORT, () => {
         console.log(`Listening on port ${PORT}`)
     })
+
+
 
