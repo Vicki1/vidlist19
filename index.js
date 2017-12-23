@@ -10,7 +10,7 @@ const express= require('express')
     , cookieParser = require('cookie-parser')
     , path = require('path')
     //, con = require('./src/config')
-    , herokuURI = process.env.REACT_APP_HEROKU_URI //con.herokuURI
+    , herokuURI = process.env.HEROKU_URI //con.herokuURI
     , connectionString = herokuURI
 
     const app=express();
@@ -25,7 +25,7 @@ app.use(express.static(__dirname + '/../build'));
 app.use(cookieParser())
 app.use(bodyParser());
    app.use(session({
-        secret: process.env.REACT_APP_SESSION_SECRET,     //con.sessionSecret,
+        secret: process.env.SESSION_SECRET,     //con.sessionSecret,
         resave: false,
         saveUninitialized: true
 }));
@@ -72,8 +72,8 @@ massive({connectionString
 const strategy = new Auth0Strategy(
   {
     domain: process.env.REACT_APP_DOMAIN, //con.domain,
-    clientID:process.env.REACT_APP_CLIENT_ID2, // con.clientID,
-    clientSecret: process.env.REACT_APP_CLIENT_SECRET, //con.clientSecret,
+    clientID:process.env.CLIENT_ID2, // con.clientID,
+    clientSecret: process.env.CLIENT_SECRET, //con.clientSecret,
     callbackURL:process.env.REACT_APP_CALLBACK_URL //con.callbackURL
   },
   (accessToken, refreshToken, extraParams, profile, done) => {
@@ -107,8 +107,8 @@ passport.deserializeUser(function(user, done) {
 app.get('/auth', passport.authenticate('auth0'));
 
 app.get('/auth/callback', passport.authenticate('auth0', {
-  successRedirect: process.env.REACT_APP_SUCCESS_REDIRECT,
-  failureRedirect:  process.env.REACT_APP_FAILURE_REDIRECT
+  successRedirect: process.env.SUCCESS_REDIRECT,
+  failureRedirect:  process.env.FAILURE_REDIRECT
 }))
 /*
 passport.serializeUser(function(user, done) {

@@ -15,7 +15,7 @@
     "massive": "^4.5.0",
     "passport": "^0.4.0",
     "passport-auth0": "^0.6.0",
-    "pm2": "^2.8.0",
+    "pm2": "^2.9.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.31.5",
     "react-dom": "^16.2.0",
@@ -32,12 +32,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "now-start" : "node index.js",
-    "deploy" : "now --public --dotenv=.env.prod -d"
+    "now-start": "node index.js",
+    "deploy": "now --public --dotenv=.env.prod -d"
   },
-  "now":{
-  "alias":"vidlist0"
-},
+  "now": {
+    "alias": "vidlist0"
+  },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).",
   "main": "index.js",
   "devDependencies": {},
