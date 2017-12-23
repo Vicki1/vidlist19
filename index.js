@@ -1,5 +1,6 @@
 
 require('dotenv').config()
+
 const express= require('express')
     , bodyParser= require('body-parser')
     , passport = require('passport')
@@ -10,7 +11,7 @@ const express= require('express')
     , cookieParser = require('cookie-parser')
     , path = require('path')
     //, con = require('./src/config')
-    , herokuURI = process.env.REACT_APP_HEROKU_URI //con.herokuURI
+    , herokuURI = process.env.HEROKU_URI //con.herokuURI
     , connectionString = herokuURI
 
     const app=express();
@@ -21,27 +22,19 @@ app.use(cors())
 
  
 
-app.use(express.static(__dirname + '/../build'));
+
 app.use(cookieParser())
 app.use(bodyParser());
-   app.use(session({
-        secret: process.env.REACT_APP_SESSION_SECRET,     //con.sessionSecret,
+app.use(session({
+        secret: process.env.SESSION_SECRET,     //con.sessionSecret,
         resave: false,
         saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.static(__dirname + '/../build'));
 
 
-
-///////////////////
-//DATABASE SETUP//
-/////////////////
-/* worked before but didn't build tables;
-massive(connectionString).then(db =>{
-    app.set('db', db)
-})
-*/
 
 massive({connectionString
 }).then(db=>{
@@ -69,12 +62,16 @@ massive({connectionString
 //AUTH0 AUTHENTICATION//
 ///////////////////////
 
-const strategy = new Auth0Strategy(
+
+
+
+
+/*const strategy = new Auth0Strategy(
   {
-    domain: process.env.REACT_APP_DOMAIN, //con.domain,
-    clientID:process.env.REACT_APP_CLIENT_ID2, // con.clientID,
-    clientSecret: process.env.REACT_APP_CLIENT_SECRET, //con.clientSecret,
-    callbackURL:process.env.REACT_APP_CALLBACK_URL //con.callbackURL
+    domain: process.env.AUTH_DOMAIN, //con.domain,
+    clientID:process.env.AUTH_CLIENT_ID, // con.clientID,
+    clientSecret: process.env.AUTH_CLIENT_SECRET, //con.clientSecret,
+    callbackURL:process.env.AUTH_CALLBACK //con.callbackURL
   },
   (accessToken, refreshToken, extraParams, profile, done) => {
     
@@ -83,6 +80,30 @@ const strategy = new Auth0Strategy(
 );
 
 passport.use(strategy);
+*/
+
+
+passport.use(new Auth0Strategy({
+  domain: process.env.AUTH_DOMAIN,
+  clientID: process.env.AUTH_CLIENT_ID,
+  clientSecret: process.env.AUTH_CLIENT_SECRET,
+  callbackURL: process.env.AUTH_CALLBACK
+}, function(accessToken, refreshToken, extraParams, profile, done) {
+
+ 
+ return done(null, profile);
+  
+
+
+
+}));
+
+app.get('/auth', passport.authenticate('auth0'));
+
+app.get('/auth/callback', passport.authenticate('auth0', {
+  successRedirect: process.env.SUCCESS_REDIRECT,
+  failureRedirect:  process.env.FAILURE_REDIRECT
+}))
 
 // This can be used to keep a smaller payload
 passport.serializeUser(function(user, done) {
@@ -104,12 +125,9 @@ passport.deserializeUser(function(user, done) {
 //AUTH0 ENDPOINTS//
 //////////////////
 
-app.get('/auth', passport.authenticate('auth0'));
 
-app.get('/auth/callback', passport.authenticate('auth0', {
-  successRedirect: process.env.REACT_APP_SUCCESS_REDIRECT,
-  failureRedirect:  process.env.REACT_APP_FAILURE_REDIRECT
-}))
+
+
 /*
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -245,3 +263,8 @@ app.get('/api/selectCollection/:collectionId', (req,res)=>{
         console.log(`Listening on port ${PORT}`)
     })
 
+
+
+/* MY PREVIOUSLY ALLOWED CALLBACK URL FOR AUTH0
+http://localhost:3001/api/callback, http://localhost:3001/api/login, http://localhost:3000/callback, https://vidlist0.now.sh/auth/me, http://localhost:3000/auth/callback, http://localhost:3001/auth/callback, https://vidl-atvcgyjdec.now.sh/, https://vidlist0.now.sh/mainPgLoggedIn, https://vidlist0.now.sh/api/callback, https://vidlist0.now.sh/callback, https://vidlist0.now.sh/auth/callback, https://vidlist0.now.sh/api/login, https://vidlist0.now.sh/, https://vidlist0.now.sh
+*/ 

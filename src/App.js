@@ -11,6 +11,8 @@ class App extends Component {
 
   render() {
       console.log(this.props.state)
+   console.log(process.env.REACT_APP_SUCCESS_REDIRECT)
+console.log( process.env.REACT_APP_FAILURE_REDIRECT)
     return (
    <div className="App">
        

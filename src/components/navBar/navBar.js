@@ -2,7 +2,9 @@ import React,{Component} from 'react';
 //import SearchBar from "../main_pg_logged_in/youtube_search/youtube_search_components/search_bar"
 import "./navBar.css";
 import {connect} from 'react-redux';
-
+import axios from 'axios';
+import {contactAuth} from '../../redux/main_reducer'
+require('dotenv').config();
 class NavBar extends Component{
   constructor(props){
       super(props)
@@ -10,7 +12,9 @@ class NavBar extends Component{
       this.setState={
 
       }
+     
   }
+
 
   render(){
       return(
@@ -102,7 +106,7 @@ class NavBar extends Component{
                                  
               </div>
           
-                       <a id="logInBtn" href="http://localhost:3001/auth">  
+                       <a href={process.env.REACT_APP_LOGIN}>  
                                 
                        <svg className="userIcon" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 258.75 258.75" width="512px" height="512px">
                                 <g>

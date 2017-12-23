@@ -7,7 +7,8 @@ const CREATE_COLLECTION = 'CREATE_COLLECTION';
 const GET_COLLECTION ='GET_COLLECTION';
 const COLLECTION_SELECTED = 'COLLECTION_SELECTED';
 const USER_ALREADY_LOGGED_IN= 'USER_ALREADY_LOGGED_IN';
-const SELECT_VIDEO='SELECT_VIDEO'
+const SELECT_VIDEO='SELECT_VIDEO';
+const AUTH_CONTACTED='AUTH_CONTACTED'
 //const DELETE_COLLECTION= 'DELETE_COLLECTION';
 
 
@@ -29,6 +30,19 @@ var initialState=
 
 
 //ACTION CRETORS, prepare them to be dispatched to reducer, but changes will happen in server via axios before action is passed to reducer to alter redux state
+export function login(){
+    
+ axios.get(`/auth/me`)
+ .then((results)=>{
+     console.log(`results from ComponentDidMoutn `,results)
+     //this.setState({username:results.data})
+     setUser(results.data)
+    })
+ .catch((err)=>console.log(`error see main_pg_logged_in.componentDidMount`,err))
+        
+    
+}
+
 export function saveVideo(userId, collectionId,videoId,descriptionUser, channelTitle, videoTitle, descriptionYouTube, thumbnailUrl){
     return {
         type: SAVE_VIDEO,
@@ -139,6 +153,7 @@ export function selectVideo(video){
 export default function mainReducer(state=initialState,action){
    
     switch(action.type){
+       
         
         case COLLECTION_SELECTED + '_FULFILLED':
         console.log('collection_select action.payload is', action.payload)

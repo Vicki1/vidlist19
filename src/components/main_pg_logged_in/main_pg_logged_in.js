@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import Collections from './collections/collections';
 import SelectedCollection from '../selected_collection/selected_collection';
 import YouTubeSearch from './youtube_search/youtube_search';
-import {setUser} from '../../redux/main_reducer';
+import {login, setUser} from '../../redux/main_reducer';
 import {connect} from 'react-redux';
 import axios from 'axios';
 
@@ -19,8 +19,10 @@ class MainPage extends Component{
                     user: ''
             }
     }
-
 componentDidMount(){
+
+  //axios.get(`https://youtube.com/puppiesarecute/title`)  
+   //axios.get(`/puppiesarecute/title`) 
  axios.get(`/auth/me`)
  .then((results)=>{
      console.log(`results from ComponentDidMoutn `,results)
@@ -58,4 +60,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps,{setUser})(MainPage);
+export default connect(mapStateToProps,{login, setUser})(MainPage);
