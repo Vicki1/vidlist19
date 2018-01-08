@@ -25,7 +25,9 @@ app.use(cors())
 
 app.use(cookieParser())
 app.use(bodyParser());
-app.use(session({
+
+   app.use(session({
+
         secret: process.env.SESSION_SECRET,     //con.sessionSecret,
         resave: false,
         saveUninitialized: true
@@ -68,10 +70,17 @@ massive({connectionString
 
 /*const strategy = new Auth0Strategy(
   {
+<<<<<<< HEAD
     domain: process.env.AUTH_DOMAIN, //con.domain,
     clientID:process.env.AUTH_CLIENT_ID, // con.clientID,
     clientSecret: process.env.AUTH_CLIENT_SECRET, //con.clientSecret,
     callbackURL:process.env.AUTH_CALLBACK //con.callbackURL
+=======
+    domain: process.env.REACT_APP_DOMAIN, //con.domain,
+    clientID:process.env.CLIENT_ID2, // con.clientID,
+    clientSecret: process.env.CLIENT_SECRET, //con.clientSecret,
+    callbackURL:process.env.REACT_APP_CALLBACK_URL //con.callbackURL
+
   },
   (accessToken, refreshToken, extraParams, profile, done) => {
     
@@ -127,6 +136,10 @@ passport.deserializeUser(function(user, done) {
 
 
 
+app.get('/auth/callback', passport.authenticate('auth0', {
+  successRedirect: process.env.SUCCESS_REDIRECT,
+  failureRedirect:  process.env.FAILURE_REDIRECT
+}))
 
 /*
 passport.serializeUser(function(user, done) {
