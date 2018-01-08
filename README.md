@@ -4,7 +4,7 @@ This project was created with with [Create React App](https://github.com/faceboo
 ## Introduction
 
 -This YouTube mock recreates youtube functionality with video searching, creating playlists, and secure login.
--Live site (http://165.227.113.126:3001/)
+-[Live Site](http://165.227.113.126:3001/)
 
 - [Updating to New Releases](#updating-to-new-releases)
 - [Sending Feedback](#sending-feedback)
