@@ -102,11 +102,7 @@ class NavBar extends Component{
                                                                     </svg>
                                                                     <span className="youTubeText">YouTube</span>
                                 </div>
-                                
-                                 
-              </div>
-          
-                       <a href={process.env.REACT_APP_LOGIN}>  
+                                 <a href={process.env.REACT_APP_LOGIN}>  
                                 
                        <svg className="userIcon" xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 258.75 258.75" width="512px" height="512px">
                                 <g>
@@ -145,6 +141,11 @@ class NavBar extends Component{
                                 </g>
                                 </svg>
                             </a>
+                                
+                                 
+              </div>
+          
+                      
                         
             </div>
 
@@ -163,3 +164,6 @@ function mapStateToProps(state){
 }
 
 export default connect(mapStateToProps)(NavBar);
+
+
+

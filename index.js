@@ -32,7 +32,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static(__dirname + '/../build'));
+app.use(express.static(__dirname + '/build'));
 
 
 
@@ -159,8 +159,8 @@ app.get('/auth/logout', (req, res) => {
 //OTHER ENDPOINTS//
 //////////////////
  app.get("/test", (req,res)=>{
-console.log('this is working ',req.user.displayName)
-
+console.log('this is working ')
+ res.status(200).send('this is working')
 
 })  
 
@@ -248,9 +248,9 @@ app.get('/api/selectCollection/:collectionId', (req,res)=>{
 
 
 
-/*app.get('*', (req, res)=>{
+app.get('*', (req, res)=>{
   res.sendFile(path.join(__dirname + '/../build'));
-})*/
+})
 
 ///////////////////////////////////////////////////
 //// END OF WHAT NEEDS TO BE THE LAST ENDPOINT////

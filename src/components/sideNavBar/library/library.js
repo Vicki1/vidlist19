@@ -25,7 +25,7 @@ class Library extends Component{
     
                 <div onClick={()=>this.props.selectCollection(collection.id)} key ={collection.id} className="singleMenuItemContainer">
                             <div className="menuLogoContainer">
-                                    <PlaylistImg/>   
+                                    <PlaylistImg/> 
                             </div>
                             <div className="menuWordContainer">
                                          <span className="menuWord">{collection.collection_name}</span>

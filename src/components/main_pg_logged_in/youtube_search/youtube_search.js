@@ -177,10 +177,10 @@ saveVideo(userId, collectionId,videoId,descriptionUser, channelTitle, videoTitle
                   
             </div>
          </div>
-          
-          <div className="titleVideoTypeContainer">
+           <div /*className="titleVideoTypeContainer"*/>
            <span>Recommended</span>
          </div>
+         
        <div className="searchedVideosContainer">
         
              {videoThumbnailList}

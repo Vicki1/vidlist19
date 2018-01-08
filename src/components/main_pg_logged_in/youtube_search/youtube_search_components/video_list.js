@@ -23,7 +23,7 @@ import {Link} from 'react-router-dom';
 <input placeholder="Your Description ..." onChange={(event)=>this.setState(Object.assign({},this.state,{ description: event.target.value }))}/>
                      <div class="dropdown">
                         <button class="dropbtn">Save To</button>
-                            <div class="dropdown-content">
+                            <div class="-content">
                             {collectionsList}
                             </div>
                     </div>
