@@ -14,10 +14,12 @@ This project was created with with [Create React App](https://github.com/faceboo
 
 ## Front End
 
-Create React App is divided into two packages:
+User Features:
 
-* `create-react-app` is a global command-line utility that you use to create new projects.
-* `react-scripts` is a development dependency in the generated projects (including this one).
+*  users can search videos immediately on landing page.
+*  users may press login icon for secure login/sign-up.
+*  users who have logged in may create playlists and add videos.
+
 
 You almost never need to update `create-react-app` itself: it delegates all the setup to `react-scripts`.
 
