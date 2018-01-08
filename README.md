@@ -43,6 +43,9 @@ This project was created with with [Create React App](https://github.com/faceboo
 
 ## Screenshots
 
-- [Landing Page](http://165.227.113.126:3001/)
-- [Login](http://165.227.113.126:3001/auth)
+- [Landing Page](https://imgur.com/a/uni0K)
+- [Login](https://imgur.com/a/tMEpR)
+- [Logged In Homepage](https://imgur.com/a/GhRUJ)
+- [Create/Add to playlist](https://imgur.com/a/Pypkj)
+- [View Playlist](https://imgur.com/a/gZLZx)
 
