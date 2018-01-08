@@ -12,7 +12,7 @@ This project was created with with [Create React App](https://github.com/faceboo
 
   
 
-1. Front End
+##Front End
 
 Create React App is divided into two packages:
 
