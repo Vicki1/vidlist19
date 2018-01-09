@@ -43,9 +43,9 @@ This project was created with with [Create React App](https://github.com/faceboo
 
 ## Screenshots
 
-- [Landing Page](https://imgur.com/a/uni0K)
-- [Login](https://imgur.com/a/tMEpR)
-- [Logged In Homepage](https://imgur.com/a/GhRUJ)
-- [Create/Add to playlist](https://imgur.com/a/Pypkj)
-- [View Playlist](https://imgur.com/a/gZLZx)
+- [Landing Page](https://imgur.com/sADTzqp)
+- [Login](https://imgur.com/YQhoduo)
+- [Logged In Homepage](https://imgur.com/pn0sECs)
+- [Create/Add to playlist](https://imgur.com/0tt0wZP)
+- [View Playlist](https://imgur.com/j57BV5E)
 
